@@ -1,0 +1,9 @@
+[package]
+name = "Hacktech2018"
+version = "0.1.0"
+authors = ["saresend <saresend@usc.edu>"]
+
+[dependencies]
+rocket = "0.3.6"
+rocket_codegen = "0.3.6"
+rand = "0.4"
