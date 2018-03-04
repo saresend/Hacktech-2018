@@ -1,18 +1,20 @@
 -- Your SQL goes here
 
 CREATE TABLE CurrEvent (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY NOT NULL,
     name TEXT NOT NULL, 
     lat REAL NOT NULL,
     lng REAL NOT NULL, 
-    start_time TEXT NOT NULL, 
-    end_time TEXT NOT NULL
+    startTime TEXT NOT NULL, 
+    endTime TEXT NOT NULL
 );
 
 CREATE TABLE NewPost (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY NOT NULL,
     url TEXT NOT NULL, 
-    user_id INTEGER NOT NULL, 
+    userId TEXT NOT NULL, 
+    eventId INTEGER NOT NULL, 
     lat REAL NOT NULL, 
-    lng REAL NOT NULL
+    lng REAL NOT NULL,
+    FOREIGN KEY(eventId) REFERENCES CurrEvent(id)
 );
