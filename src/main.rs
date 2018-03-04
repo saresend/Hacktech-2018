@@ -6,6 +6,8 @@ extern crate serde;
 extern crate geo;
 #[macro_use] extern crate serde_derive;
 
+#[macro_use] extern crate lazy_static;
+
 extern crate rocket_cors;
 extern crate rocket;
 
@@ -46,7 +48,10 @@ fn upload_image(eventId: i32,userId: String, lat: f32, lng: f32, data: Data) {
     create_dir_all(String::from("static/") + &eventId.to_string()).unwrap();
     let path = PathBuf::from("static/").join(eventId.to_string()).join(s.clone() + ".png");
     println!("{:?}", path);
-    let url = String::from(String::from("http://f19752fb.ngrok.io/image/")  + &eventId.to_string() + "/" + &s);
+  //  println!("{:?}", rocket::config::Config::address);
+    let address = rocket::config::Config::development().unwrap().address;
+    println!("{}", address);
+    let url = String::from(String::from("https://ee6f085c.ngrok.io/image/")  + &eventId.to_string() + "/" + &s);
     let new_post = UploadPost {  userId, eventId ,url, lat, lng};
     let conn = database::get_database_connection();
     diesel::insert_into(NewPost::table).values(&new_post).execute(&conn).expect("Couldn't add image");
